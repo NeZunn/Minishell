@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 03:49:28 by sinlee            #+#    #+#             */
-/*   Updated: 2023/08/15 09:22:19 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/16 17:39:22 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,26 @@
 # include <term.h>
 # include <termios.h>
 
-int		    g_errno;
-int         g_num_env_vars;
-extern char **  environ;
+// int         g_num_env_vars;
+// extern char **  environ;
 # define PATH_MAX 4096
 # define LOGIN_NAME_MAX 256
-# define N_ARGS 256
-#define MAX_ENV_VARS 1024
+# define N_ARGS 2560
+#define MAX_ENV_VARS 10240
 
 // Structure to hold environment variables
 typedef struct {
-    char *name;
+    char *key;
     char *value;
 } env_var_t;
 
-env_var_t env_vars[MAX_ENV_VARS];
+extern env_var_t **g_env_vars;
 
 void    perror_color(char *str);
 void	error_exit(char *str, bool is_perror);
 void	exit_success(void);
+
+char *prompt_msg(char	prompt[LOGIN_NAME_MAX + PATH_MAX + 20]);
 
 void	init(void);
 void	init_signals(void);
@@ -53,10 +54,17 @@ void	init_signals(void);
 bool	match_cmd(char *inpt, char *args[N_ARGS], char **envp);
 char	*find_command_path(char *command, char **envp);
 void	parse_input(char *input, char **envp);
-bool    print_env_vars();
+
+void add_env_vars(char *key, char *value);
+env_var_t *find_env_vars(char *key);
+void modify_env_vars(char *key, char *value);
+void free_env_vars(void);
+bool flip_bool_env_vars(char *key);
+// bool    print_env_vars();
 
 bool    execute_cd(char *args[N_ARGS], char **envp);
 bool    execute_export(char **args);
+bool    welcome_msg(void);
 
 int		ft_snprintf(char *str, size_t size, const char *format, ...);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   misc.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:18:19 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/15 04:18:16 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/16 17:23:18 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	error_exit(char *str, bool is_perror)
 
 void exit_success()
 {
-	printf("\n%sBELLA CIAO\n", BLUE_BOLD);
+	printf("\n%sBELLA CIAO%s\n", BLUE_BOLD, RESET_COLOR);
+	free_env_vars();
 	exit(EXIT_SUCCESS);
 }

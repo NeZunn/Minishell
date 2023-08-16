@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 03:51:29 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/16 16:17:44 by sinlee           ###   ########.fr       */
+/*   Created: 2023/08/16 17:18:41 by sinlee            #+#    #+#             */
+/*   Updated: 2023/08/16 17:44:34 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool execute_cd(char *args[N_ARGS], char **envp)
+bool  flip_bool_env_vars(char *key)
 {
-    char *path;
+    bool tmp;
 
-    if (args[1] == NULL || !ft_strcmp(args[1], "~"))
-        path = ft_strdup(getenv("HOME"));
-    else
-        path = ft_strdup(args[1]);
-    if (chdir(path) != 0)
-        perror_color("cd");
-    free(path);
+    tmp = !ft_atoi(find_env_vars(key)->value);
+    modify_env_vars(key, ft_itoa(tmp));
     return (true);
 }

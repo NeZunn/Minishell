@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
+#    By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 06:55:38 by codespace         #+#    #+#              #
-#    Updated: 2023/08/15 07:05:52 by codespace        ###   ########.fr        #
+#    Updated: 2023/08/16 18:01:16 by sinlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,22 +21,24 @@ MAIN_DIR = main
 # PARSING_DIR = parsing
 EXEC_DIR = executor
 UTILS_DIR = utils
+ENV_DIR = env
 LEXER_DIR = lexer
 # SRCS_FILES = $(addprefix $(BUILTINS_DIR)/, cd.c echo.c env.c exit.c export.c pwd.c unset.c) \
 #              $(addprefix $(EXEC_DIR)/, bin.c builtin.c exec.c) \
 #              $(addprefix $(MAIN_DIR)/, minishell.c redir.c signal.c) \
 #              $(addprefix $(PARSING_DIR)/, line.c tokens.c expansions.c) \
 #              $(addprefix $(TOOLS_DIR)/, fd.c free.c token.c type.c expansions.c parsing.c)
-SRCS_FILES = $(addprefix $(MAIN_DIR)/, main.c initialize.c signals.c) \
+SRCS_FILES = $(addprefix $(MAIN_DIR)/, main.c initialize.c signals.c prompt.c) \
 			 $(addprefix $(UTILS_DIR)/, misc.c inpt.c ft_snprintf.c) \
-			 $(addprefix $(EXEC_DIR)/, commands.c cd.c export.c) \
+			 $(addprefix $(ENV_DIR)/, env.c env_utils.c) \
+			 $(addprefix $(EXEC_DIR)/, commands.c cd.c welcome.c) \
 			#  $(addprefix $(LEXER_DIR)/, lexer.c lexer2.c)
 SRCS = $(addprefix $(SRCS_DIR)/,$(SRCS_FILES))
 
 # Object files
 OBJS_DIR = objs
 # OBJS_DIRS = $(OBJS_DIR) $(OBJS_DIR)/$(BUILTINS_DIR) $(OBJS_DIR)/$(EXEC_DIR) $(OBJS_DIR)/$(MAIN_DIR) $(OBJS_DIR)/$(PARSING_DIR) $(OBJS_DIR)/$(TOOLS_DIR)
-OBJS_DIRS = $(OBJS_DIR) $(OBJS_DIR)/$(MAIN_DIR) $(OBJS_DIR)/$(UTILS_DIR) $(OBJS_DIR)/$(EXEC_DIR)
+OBJS_DIRS = $(OBJS_DIR) $(OBJS_DIR)/$(MAIN_DIR) $(OBJS_DIR)/$(UTILS_DIR) $(OBJS_DIR)/$(EXEC_DIR) $(OBJS_DIR)/$(ENV_DIR)
 OBJS_FILES = $(patsubst %.c,%.o,$(SRCS_FILES))
 OBJS = $(addprefix $(OBJS_DIR)/,$(OBJS_FILES))
 
@@ -87,6 +89,7 @@ $(PRINTF):
 clean:
 	@echo "$(BOLD)$(LIGHT_BLUE)Cleaning objects...$(RESET)"
 	@rm -rf $(OBJS_DIR)
+	@rm -f a.out
 	@make -C $(LIBFT_DIR) clean -s
 	@make -C $(PRINTF_DIR) clean -s
 

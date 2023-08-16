@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:01:17 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/15 07:04:46 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/16 17:41:47 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 #include "minishell.h"
 
+env_var_t **g_env_vars;
+
 int	main(int argc, char **argv, char **envp)
 {
-	char	*username;
-	char	cwd[PATH_MAX];
 	char	*input;
 	char	prompt[LOGIN_NAME_MAX + PATH_MAX + 20];
 
@@ -26,20 +26,8 @@ int	main(int argc, char **argv, char **envp)
 	init();
 	while (1)
 	{
-		username = getenv("USER");
-		if (username == NULL)
-		{
-			perror("getenv");
-			exit(EXIT_FAILURE);
-		}
-		if (getcwd(cwd, sizeof(cwd)) == NULL)
-		{
-			perror("getcwd");
-			exit(EXIT_FAILURE);
-		}
-		ft_snprintf(prompt, sizeof(prompt), "\033[0;35m@%s %s-> %s%s%s $ %s",
-			username, RESET_COLOR, BLUE_BOLD, cwd, RESET_COLOR, CYAN);
-		input = readline(prompt);
+		
+		input = readline(prompt_msg(prompt));
 		if (!input)
 			exit_success();
 		add_history(input);
