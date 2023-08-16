@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 14:21:28 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/15 07:00:03 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/16 23:03:00 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
-# include <termio.h>
-# include <termios.h>
 
 void	sigint_handler(int signo)
 {

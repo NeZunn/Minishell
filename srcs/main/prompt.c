@@ -6,7 +6,7 @@
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 02:29:43 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/16 19:02:47 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/16 19:05:56 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char *quotes_author(void)
         "Confucius",
         "Plato",
         "Heraclitus",
-        "sinlee"
+        "sinlee",
     };
     return (quotes[ft_atoi(find_env_vars("NUM_QUOTES")->value) % (sizeof(quotes) / sizeof(quotes[0]))]);
 }
