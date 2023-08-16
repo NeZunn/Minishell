@@ -6,7 +6,7 @@
 #    By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 06:55:38 by codespace         #+#    #+#              #
-#    Updated: 2023/08/16 18:01:16 by sinlee           ###   ########.fr        #
+#    Updated: 2023/08/16 19:01:54 by sinlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,16 +29,17 @@ LEXER_DIR = lexer
 #              $(addprefix $(PARSING_DIR)/, line.c tokens.c expansions.c) \
 #              $(addprefix $(TOOLS_DIR)/, fd.c free.c token.c type.c expansions.c parsing.c)
 SRCS_FILES = $(addprefix $(MAIN_DIR)/, main.c initialize.c signals.c prompt.c) \
-			 $(addprefix $(UTILS_DIR)/, misc.c inpt.c ft_snprintf.c) \
+			 $(addprefix $(UTILS_DIR)/, misc.c ft_snprintf.c inpt.c) \
 			 $(addprefix $(ENV_DIR)/, env.c env_utils.c) \
 			 $(addprefix $(EXEC_DIR)/, commands.c cd.c welcome.c) \
-			#  $(addprefix $(LEXER_DIR)/, lexer.c lexer2.c)
+			#  $(addprefix $(LEXER_DIR)/, lexer.c)
+
 SRCS = $(addprefix $(SRCS_DIR)/,$(SRCS_FILES))
 
 # Object files
 OBJS_DIR = objs
 # OBJS_DIRS = $(OBJS_DIR) $(OBJS_DIR)/$(BUILTINS_DIR) $(OBJS_DIR)/$(EXEC_DIR) $(OBJS_DIR)/$(MAIN_DIR) $(OBJS_DIR)/$(PARSING_DIR) $(OBJS_DIR)/$(TOOLS_DIR)
-OBJS_DIRS = $(OBJS_DIR) $(OBJS_DIR)/$(MAIN_DIR) $(OBJS_DIR)/$(UTILS_DIR) $(OBJS_DIR)/$(EXEC_DIR) $(OBJS_DIR)/$(ENV_DIR)
+OBJS_DIRS = $(OBJS_DIR) $(OBJS_DIR)/$(MAIN_DIR) $(OBJS_DIR)/$(UTILS_DIR) $(OBJS_DIR)/$(EXEC_DIR) $(OBJS_DIR)/$(ENV_DIR) $(OBJS_DIR)/$(LEXER_DIR)
 OBJS_FILES = $(patsubst %.c,%.o,$(SRCS_FILES))
 OBJS = $(addprefix $(OBJS_DIR)/,$(OBJS_FILES))
 

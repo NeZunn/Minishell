@@ -6,13 +6,13 @@
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 13:55:51 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/16 15:13:41 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/16 18:58:18 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
 
-void parse_input(char *input, char **envp)
+void parse_input(char *input, char **envp) // input -> "ls -l | wc -l"
 {
     if (input[0] != '\0')
     {

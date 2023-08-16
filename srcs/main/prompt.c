@@ -6,7 +6,7 @@
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 02:29:43 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/16 17:58:43 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/16 19:02:47 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ char *quotes_author(void)
         "Confucius",
         "Confucius",
         "Plato",
-        "Heraclitus"
+        "Heraclitus",
+        "sinlee"
     };
     return (quotes[ft_atoi(find_env_vars("NUM_QUOTES")->value) % (sizeof(quotes) / sizeof(quotes[0]))]);
 }
@@ -42,7 +43,8 @@ char *pick_quotes(void)
         "The only way to deal with life's imperfections is to enjoy each and every day.",
         "Life is really simple, but we insist on making it complicated.",
         "The unexamined life is not worth living.",
-        "Our lives are like a candle in the wind."
+        "Our lives are like a candle in the wind.",
+        "Pipex when?"
     };
     return (quotes[ft_atoi(find_env_vars("NUM_QUOTES")->value) % (sizeof(quotes) / sizeof(quotes[0]))]);
 }

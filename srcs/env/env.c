@@ -6,7 +6,7 @@
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:41:03 by sinlee            #+#    #+#             */
-/*   Updated: 2023/08/16 17:43:49 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/16 18:54:18 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,4 @@ void free_env_vars(void)
         if (g_env_vars[i]->value != NULL)
             free(g_env_vars[i]->value);
     }
-    printf("Environment variables freed.\n");
 }
