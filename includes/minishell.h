@@ -6,7 +6,7 @@
 /*   By: djin <djin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 22:36:48 by djin              #+#    #+#             */
-/*   Updated: 2023/08/16 22:36:48 by djin             ###   ########.fr       */
+/*   Updated: 2023/08/16 22:40:27 by djin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ typedef struct s_token
 }	t_token;
 
 // Structure to hold environment variables
-typedef struct s_env_var
+typedef struct env_var_s
 {
     char	*key;
     char	*value;
-}	t_env_var;
+}	env_var_t;
 
 extern env_var_t **g_env_vars;
 
