@@ -6,7 +6,7 @@
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:01:17 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/16 17:41:47 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/17 16:51:39 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int argc, char **argv, char **envp)
 	init();
 	while (1)
 	{
-		
 		input = readline(prompt_msg(prompt));
 		if (!input)
 			exit_success();
