@@ -1,0 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer_linked_list_utils                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: djin <djin@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/17 10:18:48 by djin              #+#    #+#             */
+/*   Updated: 2023/08/17 10:37:56 by djin             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/minishell.h"
+
+void	add_token(t_token **add_token, t_token *tok)
+{
+	t_token	*prev_token;
+\
+	if (!(*add_token))
+	{
+		*add_token = tok;
+		return ;
+	}
+	prev_token = *add_token;
+	while (prev_token->next)
+		prev_token = prev_token->next;
+	prev_token->next = tok;
+	tok->prev = prev_token;
+}
