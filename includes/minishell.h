@@ -5,10 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/16 22:36:48 by djin              #+#    #+#             */
-/*   Updated: 2023/08/17 07:58:11 by codespace        ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/08/17 08:11:53 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16,7 +26,7 @@
 # define MINISHELL_H
 
 # include "color.h"
-# include "../lib/libft/includes/libft.h"
+# include "libft.h"
 # include <dirent.h>
 # include <errno.h>
 # include <readline/history.h>
