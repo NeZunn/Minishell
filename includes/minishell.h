@@ -6,7 +6,7 @@
 /*   By: djin <djin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 22:36:48 by djin              #+#    #+#             */
-/*   Updated: 2023/08/16 22:40:27 by djin             ###   ########.fr       */
+/*   Updated: 2023/08/17 10:41:14 by djin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,11 @@
 // Structure to hold tokens
 typedef struct s_token
 {
-	int		type;
-	char	*value;
+	int				type;
+	char			*value;
+	char			*cmd_path;
+	struct s_token	*next;
+	struct s_token	*prev;
 }	t_token;
 
 // Structure to hold environment variables
