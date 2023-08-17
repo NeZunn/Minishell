@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djin <djin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 22:36:48 by djin              #+#    #+#             */
-/*   Updated: 2023/08/16 22:40:27 by djin             ###   ########.fr       */
+/*   Updated: 2023/08/16 23:08:17 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define MINISHELL_H
 
 # include "color.h"
-# include "../lib/libft/includes/libft.h"
+# include "libft.h"
 # include <dirent.h>
 # include <errno.h>
 # include <readline/history.h>
