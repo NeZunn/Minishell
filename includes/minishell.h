@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djin <djin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 22:36:48 by djin              #+#    #+#             */
-/*   Updated: 2023/08/17 10:41:14 by djin             ###   ########.fr       */
+/*   Updated: 2023/08/17 07:58:11 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@
 # define DOUBLE_AND 7
 # define OPEN_BRACKET 8
 # define CLOSE_BRACKET 9
+# define QUOTE 10
+# define DQUOTE 11
+# define WORD 12
+# define DOLLAR_SIGN 13
+# define REDIR_OUT_APPEND 14
+# define OPTION 15
 
 // int         g_num_env_vars;
 // extern char **  environ;
@@ -91,5 +97,9 @@ bool		execute_export(char **args);
 bool		welcome_msg(void);
 
 int			ft_snprintf(char *str, size_t size, const char *format, ...);
+char		*ft_strtok(char *str, const char *delim);
 
+t_token		*first_last_token(t_token *tokens, bool is_last);
+
+int			ft_strlen1(char *str);
 #endif
