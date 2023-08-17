@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djin <djin@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:11:33 by djin              #+#    #+#             */
-/*   Updated: 2023/08/17 10:43:46 by djin             ###   ########.fr       */
+/*   Updated: 2023/08/17 11:04:01 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 void	space_skip(char *str, int *i)
 {
@@ -18,50 +18,22 @@ void	space_skip(char *str, int *i)
 		(*i)++;
 }
 
-void	is_seperator(char *str, int *i, t_token *tok)
+char	check_type(char *str, t_token *tokens)
 {
-	if (str[*i] == '|')
+	int	i;
+
+	i = 0;
+	while(str[i])
 	{
-		tok->type = PIPE;
-		(*i)++;
-	}
-	else if (str[*i] == '>')
-	{
-		tok->type = REDIR_OUT;
-		(*i)++;
-	}
-	else if (str[*i] == '<')
-	{
-		if (str[*i + 1] == '<')
-		{
-			tok->type = HERE_DOC;
-			(*i) += 2;
-		}
-		else
-		{
-			tok->type = REDIR_IN;
-			(*i)++;
-		}
-	}
-	else if (str[*i] == '&')
-	{
-		if (str[*i + 1] == '&')
-		{
-			tok->type = DOUBLE_AND;
-			(*i) += 2;
-		}
-		else
-		{
-			tok->type = AND;
-			(*i)++;
-		}
-	}
-	else if (str[*i] == '(' || str[*i] == ')')
-	{
-		if (str[*i] == '(')
-			tok->type = OPEN_BRACKET;
-		else
-			tok->type = CLOSE_BRACKET;
-		(*i)++;
+		if (str[i] == ' ')
+			space_skip(str, &i);
+		if (str[i] == '|' || (str[i] == '>' && str[i + 1] == '>') || str[i] == '<'
+			|| (str[i] == '<' && str[i + 1] == '<') || str[i] == '>' || str[i] == '&'
+			|| str[i] == '(' || str[i] == ')' || str[i] == ft_isdigit(str[i])
+			|| str[i] == '$' || str[i] == '\'' || str[i] == '\"'|| str[i] == '\\'
+			|| str[i] == '/' || (str[i] == '|' && str[i + 1] == '|') || str[i] == '{'
+			|| str[i] == '}')
+			is_seperator(str, &i, &tokens);
+		i++;
 	}
 }
