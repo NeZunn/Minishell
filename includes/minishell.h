@@ -6,21 +6,9 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/17 08:11:53 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/17 13:36:33 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
-
-
-
-
-
-
-
-
-
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -40,12 +28,17 @@
 # include <termios.h>
 # include <stdbool.h>
 
+// separator tokens
 # define PIPE 1
 # define HERE_DOC 2
 # define REDIR_IN 3
 # define REDIR_OUT 4
-# define AND 5
-# define OR 6
+# define ANDPARSEN 5
+# define REDIR_OUT_APPEND 6
+# define OPEN_BRACE 16
+# define CLOSE_BRACE 17
+
+# define OR 14
 # define DOUBLE_AND 7
 # define OPEN_BRACKET 8
 # define CLOSE_BRACKET 9
@@ -53,7 +46,7 @@
 # define DQUOTE 11
 # define WORD 12
 # define DOLLAR_SIGN 13
-# define REDIR_OUT_APPEND 14
+
 # define OPTION 15
 
 // int         g_num_env_vars;
@@ -111,5 +104,5 @@ char		*ft_strtok(char *str, const char *delim);
 
 t_token		*first_last_token(t_token *tokens, bool is_last);
 
-int			ft_strlen1(char *str);
+char	check_type(char *str);
 #endif
