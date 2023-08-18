@@ -15,6 +15,6 @@
 # define BOO_NO_EXPANSION 10 // ''
 # define DOMESTIC_EXPANSION 11 // ""
 # define WORD 12
-# define DOLLAR_SIGN 13
+# define DOLLAR 13
 
 # define OPTION 15

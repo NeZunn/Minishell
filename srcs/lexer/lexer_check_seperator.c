@@ -6,7 +6,7 @@
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 08:27:44 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/18 23:40:08 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/18 23:45:28 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,24 +77,24 @@ void	is_symbol(char *str, int *i, t_token **tokens)
 		}
 		else
 		{
-			(*tokens)->type = AMPERSAND;
+			(*tokens)->type = AMPERSAND; //ggwp, autolose, next game
 			i++;
 		}
 	}
 	else if (str[*i] == '$')
 	{
-		(*tokens)->type = DOLLAR;
+		(*tokens)->type = DOLLAR; // financial issue?
 		(*i)++;
 	}
 	else if (str[*i] == '\'' || str[*i] == '\"')
 	{
 		if (str[*i] == '\'')
 		{
-			(*tokens)->type = QUOTE;
+			(*tokens)->type = BOO_NO_EXPANSION;
 		}
 		else
 		{
-			(*tokens)->type = DQUOTE;
+			(*tokens)->type = DOMESTIC_EXPANSION;
 		}
 		(*i)++;
 	}
