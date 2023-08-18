@@ -6,57 +6,54 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 08:27:44 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/17 14:08:26 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/18 15:24:14 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	is_seperator(char *str, int *i, t_token **tokens)
+void	is_symbol(char *str, int *i, t_token **tokens)
 {
 	if (str[*i] == '|')
 	{
 		if (str[*i + 1] == '|')
 		{
 			(*tokens)->type = OR;
-			(*tokens)->next = (*tokens);
 			(*i) += 2;
 		}
 		else
 		{
 			(*tokens)->type = PIPE;
-			(*tokens)->next = (*tokens);
 			i++;
 		}
 	}
-	else if(str[*i] == '<')
+	else if(str[*i] == '<' || str[*i] == '>')
 	{
-		if (str[*i + 1] == '<')
+		if (str[*i + 1] == '<' || str[*i] == '<')
 		{
-			(*tokens)->type = HERE_DOC;
-			(*tokens)->next = (*tokens);
-			(*i) += 2;
+			if (str[*i] == '<')
+			{
+				(*tokens)->type = REDIR_IN;
+				i++;
+			}
+			else
+			{
+				(*tokens)->type = HERE_DOC;
+				(*i) += 2;
+			}
 		}
-		else
+		else if (str[*i + 1] == '>' || str[*i] == '>')
 		{
-			(*tokens)->type = REDIR_IN;
-			(*tokens)->next = (*tokens);
-			i++;
-		}
-	}
-	else if (str[*i] == '>')
-	{
-		if (str[*i + 1] == '>')
-		{
-			(*tokens)->type = REDIR_APPEND;
-			(*tokens)->next = (*tokens);
-			(*i) += 2;
-		}
-		else
-		{
-			(*tokens)->type = REDIR_OUT;
-			(*tokens)->next = (*tokens);
-			i++;
+			if (str[*i] == '>')
+			{
+				(*tokens)->type = REDIR_OUT;
+				i++;
+			}
+			else
+			{
+				(*tokens)->type = REDIR_APPEND;
+				(*i) += 2;
+			}
 		}
 	}
 	else if (str[*i] == '(' || str[*i] == ')' || str[*i] == '{' || str[*i] == '}')
@@ -67,16 +64,8 @@ void	is_seperator(char *str, int *i, t_token **tokens)
 			(*tokens)->type = CLOSE_BRACKET;
 		else if (str[*i] == '{')
 			(*tokens)->type = OPEN_BRACE;
-		(*tokens)->next = (*tokens);
 		else
 			(*tokens)->type = CLOSE_BRACE;
-		(*tokens)->next = (*tokens);
-		(*i)++;
-	}
-	else if (str[*i] == '\\')
-	{
-		(*tokens)->type = BACKSLASH;
-		(*tokens)->next = (*tokens);
 		(*i)++;
 	}
 	else if (str[*i] == '&')
@@ -84,32 +73,49 @@ void	is_seperator(char *str, int *i, t_token **tokens)
 		if (str[*i + 1] == '&')
 		{
 			(*tokens)->type = AND;
-			(*tokens)->next = (*tokens);
 			(*i) += 2;
 		}
 		else
 		{
 			(*tokens)->type = AMPERSAND;
-			(*tokens)->next = (*tokens);
 			i++;
 		}
 	}
 	else if (str[*i] == '$')
 	{
 		(*tokens)->type = DOLLAR;
-		(*tokens)->next = (*tokens);
 		(*i)++;
 	}
-	else if (str[*i] == '\'')
+	else if (str[*i] == '\'' || str[*i] == '\"')
 	{
-		(*tokens)->type = QUOTE;
-		(*tokens)->next = (*tokens);
+		if (str[*i] == '\'')
+		{
+			(*tokens)->type = QUOTE;
+		}
+		else
+		{
+			(*tokens)->type = DQUOTE;
+		}
 		(*i)++;
 	}
-	else if (str[*i] == '\"')
-	{
-		(*tokens)->type = DQUOTE;
-		(*tokens)->next = (*tokens);
-		(*i)++;
-	}
+	(*tokens)->next = (*tokens);
+}
+
+void	is_word(char *str, int *i, t_token **tokens)
+{
+	int		j;
+	char	*word;
+
+	j = 0;
+	while (str[*i + j] && str[*i + j] != ' ' && str[*i + j] != '|' && str[*i + j] != '<'
+		&& str[*i + j] != '>' && str[*i + j] != '&'
+		&& str[*i + j] != '(' && str[*i + j] != ')' && str[*i + j] != '$' 
+		&& str[*i + j] != '\'' && str[*i + j] != '\"'&& str[*i + j] != '\\'
+		&& str[*i + j] != '/' && str[*i + j] != '{' && str[*i + j] != '}')
+		j++;
+	word = ft_substr(str, *i, j);
+	(*tokens)->type = WORD;
+	(*tokens)->content = word;
+	(*tokens)->next = (*tokens);
+	(*i) += j;
 }
