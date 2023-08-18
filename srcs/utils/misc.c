@@ -6,7 +6,7 @@
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:18:19 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/16 17:23:18 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/17 22:49:28 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	error_exit(char *str, bool is_perror)
 
 void exit_success()
 {
-	printf("\n%sBELLA CIAO%s\n", BLUE_BOLD, RESET_COLOR);
+	printf("%sBELLA CIAO%s\n", BLUE_BOLD, RESET_COLOR);
 	free_env_vars();
 	exit(EXIT_SUCCESS);
 }

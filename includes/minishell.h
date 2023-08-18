@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/17 13:36:33 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/18 23:36:46 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "color.h"
+# include "tokens.h"
 # include "libft.h"
 # include <dirent.h>
 # include <errno.h>
@@ -27,27 +28,6 @@
 # include <term.h>
 # include <termios.h>
 # include <stdbool.h>
-
-// separator tokens
-# define PIPE 1
-# define HERE_DOC 2
-# define REDIR_IN 3
-# define REDIR_OUT 4
-# define ANDPARSEN 5
-# define REDIR_OUT_APPEND 6
-# define OPEN_BRACE 16
-# define CLOSE_BRACE 17
-
-# define OR 14
-# define DOUBLE_AND 7
-# define OPEN_BRACKET 8
-# define CLOSE_BRACKET 9
-# define QUOTE 10
-# define DQUOTE 11
-# define WORD 12
-# define DOLLAR_SIGN 13
-
-# define OPTION 15
 
 // int         g_num_env_vars;
 // extern char **  environ;
@@ -73,7 +53,14 @@ typedef struct env_var_s
     char	*value;
 }	env_var_t;
 
-extern env_var_t **g_env_vars;
+typedef struct oppenheimer
+{
+	int	nuclear_status; // exit status
+	env_var_t	**env_vars;
+}	t_oppenheimer;
+
+// extern env_var_t **g_env_vars;
+extern t_oppenheimer g_oppenheimer;
 
 void		perror_color(char *str);
 void		error_exit(char *str, bool is_perror);

@@ -42,7 +42,7 @@ void tokenize_input(const char *input, Token *tokens, int *num_tokens) {
         if (input[token_start] == '\'' || input[token_start] == '\"') {
             char quote = input[token_start++];
             token_end = token_start;
-            while (token_end < input_length && input[token_end] != quote) {
+            while (token_end < input_length && input[token_end] != quote) { // ' or "
                 token_end++;
             }
         } else {
