@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
@@ -28,10 +28,11 @@ char	check_type(char *str, t_token *tokens)
 		if (str[i] == ' ')
 			space_skip(str, &i);
 		if (str[i] == '|' || || str[i] == '<' || str[i] == '>' || str[i] == '&'
-			|| str[i] == '(' || str[i] == ')' || str[i] == ft_isdigit(str[i])
-			|| str[i] == '$' || str[i] == '\'' || str[i] == '\"'|| str[i] == '\\'
+			|| str[i] == '(' || str[i] == ')' || str[i] == '$' 
+			|| str[i] == '\'' || str[i] == '\"'|| str[i] == '\\'
 			|| str[i] == '/' || str[i] == '{' || str[i] == '}')
-			is_seperator(str, &i, &tokens);
-		i++;
+			is_symbol(str, &i, &tokens);
+		if (str[i] == is_word(str, &i, &tokens))
+			is_word(str, &i, &tokens);
 	}
 }
