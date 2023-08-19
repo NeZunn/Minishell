@@ -6,7 +6,7 @@
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 02:29:43 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/16 19:05:56 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/18 23:46:50 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char *quotes_author(void)
         "Plato",
         "Heraclitus",
         "sinlee",
+        "sinlee"
     };
     return (quotes[ft_atoi(find_env_vars("NUM_QUOTES")->value) % (sizeof(quotes) / sizeof(quotes[0]))]);
 }
@@ -44,7 +45,8 @@ char *pick_quotes(void)
         "Life is really simple, but we insist on making it complicated.",
         "The unexamined life is not worth living.",
         "Our lives are like a candle in the wind.",
-        "Pipex when?"
+        "Pipex when?",
+        "Chou Ult more like chou the wrong turret"
     };
     return (quotes[ft_atoi(find_env_vars("NUM_QUOTES")->value) % (sizeof(quotes) / sizeof(quotes[0]))]);
 }

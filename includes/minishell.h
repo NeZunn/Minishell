@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/18 17:49:43 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/19 16:27:39 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ typedef struct env_var_s
     char	*value;
 }	env_var_t;
 
-typedef struct oppenheimer
+typedef struct s_main
 {
 	int	nuclear_status; // exit status
 	env_var_t	**env_vars;
-}	t_oppenheimer;
+}	t_main;
 
 // extern env_var_t **g_env_vars;
-extern t_oppenheimer g_oppenheimer;
+extern t_main *g_main;
 
 void		perror_color(char *str);
 void		error_exit(char *str, bool is_perror);
