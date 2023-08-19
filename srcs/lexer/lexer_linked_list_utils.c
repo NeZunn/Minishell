@@ -6,26 +6,22 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:18:48 by djin              #+#    #+#             */
-/*   Updated: 2023/08/17 08:13:12 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/18 17:47:21 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	add_token(t_token **add_token, t_token *tok)
+t_token	*token_join(t_token *tokens, char *str)
 {
-	t_token	*prev_token;
+	t_token	*new_token;
 
-	if (!(*add_token))
-	{
-		*add_token = tok;
-		return ;
-	}
-	prev_token = *add_token;
-	while (prev_token->next)
-		prev_token = prev_token->next;
-	prev_token->next = tok;
-	tok->prev = prev_token;
+	new_token = create_token(str, 0);
+	if (!new_token || !tokens)
+		return (NULL);
+	tokens -> next = new_token;
+	new_token -> prev = tokens;
+	return (new_token); 
 }
 
 t_token *first_last_token(t_token *tokens, bool is_last)
@@ -48,14 +44,15 @@ t_token *first_last_token(t_token *tokens, bool is_last)
 
 t_token create_token(char *value, int type)
 {
-	t_token	token;
+	t_token tokens;
 
-	token.value = value;
-	token.type = type;
-	token.next = NULL;
-	token.prev = NULL;
-	token.cmd_path = NULL;
-	return (token);
+	tokens = malloc(sizeof(t_token));
+	if (!tokens)
+		return (NULL);
+	tokens->value = value;
+	tokens->type = type;
+	tokens->next = NULL;
+	tokens->prev = NULL;
 }
 
 void	free_token(t_token *token)
