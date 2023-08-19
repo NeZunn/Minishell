@@ -6,7 +6,7 @@
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:41:03 by sinlee            #+#    #+#             */
-/*   Updated: 2023/08/16 18:54:18 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/19 16:29:34 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void add_env_vars(char *key, char *value)
     i = 0;
     if (key == NULL)
         perror_color("Environment Variables Name CANNOT be NULL!");
-    while (g_env_vars[i]->key != NULL && i < MAX_ENV_VARS)
+    while (g_main->env_vars[i]->key != NULL && i < MAX_ENV_VARS)
         i++;
     if (i == MAX_ENV_VARS)
         perror_color("So... Maximum number of environment variables reached. ggwp?");
-    g_env_vars[i]->key = key;
-    g_env_vars[i]->value = value;
+    g_main->env_vars[i]->key = key;
+    g_main->env_vars[i]->value = value;
     // printf("Added %s=%s at index %d\n", key, value, i);
 }
 
@@ -45,7 +45,7 @@ env_var_t *find_env_vars(char *key)
     int i;
 
     i = 0;
-    while (ft_strcmp(g_env_vars[i]->key, key) && i < MAX_ENV_VARS)
+    while (ft_strcmp(g_main->env_vars[i]->key, key) && i < MAX_ENV_VARS)
         i++;
     if (i == MAX_ENV_VARS)
     {
@@ -53,7 +53,7 @@ env_var_t *find_env_vars(char *key)
         return (NULL);
     }
     else
-        return (g_env_vars[i]);
+        return (g_main->env_vars[i]);
 }
 
 void free_env_vars(void)
@@ -63,9 +63,9 @@ void free_env_vars(void)
     i = -1;
     while (++i < MAX_ENV_VARS)
     {
-        if (g_env_vars[i]->key != NULL)
-            free(g_env_vars[i]->key);
-        if (g_env_vars[i]->value != NULL)
-            free(g_env_vars[i]->value);
+        if (g_main->env_vars[i]->key != NULL)
+            free(g_main->env_vars[i]->key);
+        if (g_main->env_vars[i]->value != NULL)
+            free(g_main->env_vars[i]->value);
     }
 }

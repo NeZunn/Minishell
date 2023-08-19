@@ -6,7 +6,7 @@
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:18:19 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/17 22:49:28 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/19 16:37:16 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	error_exit(char *str, bool is_perror)
 {
 	char *msg;
 
-	ft_snprintf(msg, sizeof(msg), "%s%s%s", RED, str, CYAN);
+	msg = malloc(1024);
+	ft_snprintf(msg, 1024, "%s%s%s", RED, str, RESET_COLOR);
 	if (is_perror)
 		perror(msg);
 	else

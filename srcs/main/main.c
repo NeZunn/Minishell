@@ -6,7 +6,7 @@
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:01:17 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/17 16:51:39 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/19 16:28:01 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include "minishell.h"
 
-env_var_t **g_env_vars;
+t_main *g_main;
 
 int	main(int argc, char **argv, char **envp)
 {
