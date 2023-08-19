@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/18 17:49:43 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/19 05:55:16 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ t_token		*first_last_token(t_token *tokens, bool is_last);
 t_token		*token_join(t_token *tokens, char *str);
 t_token 	create_token(char *value, int type);
 void		free_token(t_token *token);
-
 char		check_type(char *str);
+void		is_symbol(char *str, int *i, t_token **tokens)
+void		space_skip(char *str, int *i)
 #endif

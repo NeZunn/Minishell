@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 void	space_skip(char *str, int *i)
 {
@@ -36,4 +36,6 @@ char	check_type(char *str, t_token *tokens)
 		if (str[i] == is_word(str, &i, &tokens))
 			is_word(str, &i, &tokens);
 	}
+	first_last_token(tokens, false);
+	return (tokens);
 }
