@@ -6,7 +6,7 @@
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:01:17 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/19 16:28:01 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/19 20:55:41 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 1 || argv[1])
 		error_exit("Error: too many arguments\n", false);
-	init();
+	init(envp);
 	while (1)
 	{
 		input = readline(prompt_msg(prompt));

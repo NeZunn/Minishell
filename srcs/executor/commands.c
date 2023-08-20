@@ -6,7 +6,7 @@
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 13:58:35 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/16 17:21:45 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/20 11:32:48 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,8 @@ bool	match_cmd(char *inpt, char *args[N_ARGS], char **envp)
 		welcome_msg();
 	else if (!ft_strcmp(inpt, "quotes"))
 		flip_bool_env_vars("QUOTES");
-	// else if (ft_strcmp(inpt, "export") == 0)
-	// {
-	    // if (args[1] != NULL)
-        // {
-        //     if(execute_export(args) == true)
-        //         printf("Environment variable exported successfully.\n");
-		// 	return (true);
-        // }
-        // else
-        //     print_env_vars();
-	// }
+	else if (ft_strcmp(inpt, "export") == 0)
+		execute_export(args);
 	// else if (ft_strcmp(inpt, "unset"))
 	//     ft_unset(envp);
 	else

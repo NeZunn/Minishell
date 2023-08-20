@@ -6,7 +6,7 @@
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:21:02 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/19 16:28:47 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/20 11:56:32 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,26 @@
 // 	tools->reset = false;
 // }
 
-static void init_env(void)
+static void init_env(char **envp)
 {
-	int	i;
+	int		i;
+	char	*ms_path;
 
 	i = -1;
-	g_main->env_vars = malloc(sizeof(env_var_t *) * MAX_ENV_VARS);
-	while (++i < MAX_ENV_VARS)
-	{
-		g_main->env_vars[i] = malloc(sizeof(env_var_t));
-		g_main->env_vars[i]->key = NULL;
-		g_main->env_vars[i]->value = NULL;
-	}
+	ms_path = ft_malloc(PATH_MAX);
+	ft_snprintf(ms_path, PATH_MAX, "SHELL=%s/minishell", getenv("PWD"));
+	envp[find_env("SHELL", envp)] = ms_path;
+	g_main->env_vars = dup_darr(envp);
 	add_env_vars(ft_strdup("NUM_QUOTES"), ft_strdup("0"));
 	add_env_vars(ft_strdup("QUOTES"), ft_strdup("0"));
+	// add_env_vars(ft_strdup("TEST"), ft_strdup("123"));
 }
 
-void	init(void)
+void	init(char **envp)
 {
 	// g_num_env_vars = 0;
 	g_main = malloc(sizeof(t_main));
-	init_env();
+	init_env(envp);
 	init_signals();
 	welcome_msg();
 }

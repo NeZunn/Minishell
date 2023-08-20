@@ -6,7 +6,7 @@
 #    By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 06:55:38 by codespace         #+#    #+#              #
-#    Updated: 2023/08/18 23:38:24 by sinlee           ###   ########.fr        #
+#    Updated: 2023/08/20 11:36:45 by sinlee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,9 @@ LEXER_DIR = lexer
 #              $(addprefix $(PARSING_DIR)/, line.c tokens.c expansions.c) \
 #              $(addprefix $(TOOLS_DIR)/, fd.c free.c token.c type.c expansions.c parsing.c)
 SRCS_FILES = $(addprefix $(MAIN_DIR)/, main.c initialize.c signals.c prompt.c) \
-			 $(addprefix $(UTILS_DIR)/, misc.c ft_snprintf.c inpt.c) \
+			 $(addprefix $(UTILS_DIR)/, misc.c ft_snprintf.c inpt.c ft_malloc.c) \
 			 $(addprefix $(ENV_DIR)/, env.c env_utils.c) \
-			 $(addprefix $(EXEC_DIR)/, commands.c cd.c welcome.c) \
+			 $(addprefix $(EXEC_DIR)/, commands.c cd.c welcome.c export.c) \
 			#  $(addprefix $(LEXER_DIR)/, lexer.c)
 
 SRCS = $(addprefix $(SRCS_DIR)/,$(SRCS_FILES))
