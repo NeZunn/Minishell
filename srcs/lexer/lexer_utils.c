@@ -23,10 +23,11 @@ char	check_type(char *str, t_token *tokens)
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i] != '\0')
 	{
+		tokens = token_join(tokens, str[i]);
 		if (str[i] == ' ')
-			space_skip(str, &i);
+			space_skip(, &i);
 		if (str[i] == '|' || || str[i] == '<' || str[i] == '>' || str[i] == '&'
 			|| str[i] == '(' || str[i] == ')' || str[i] == '$' 
 			|| str[i] == '\'' || str[i] == '\"'|| str[i] == '\\'

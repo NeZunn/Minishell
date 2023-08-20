@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 21:06:06 by sinlee            #+#    #+#             */
 /*   Updated: 2023/08/20 11:36:36 by sinlee           ###   ########.fr       */
@@ -97,7 +97,11 @@ int			ft_snprintf(char *str, size_t size, const char *format, ...);
 char		*ft_strtok(char *str, const char *delim);
 void		*ft_malloc(size_t size);
 
+// Token functions
 t_token		*first_last_token(t_token *tokens, bool is_last);
+t_token		*token_join(t_token *tokens, char *str);
+t_token 	create_token(char *value, int type);
+void		free_token(t_token *token);
 
-char	check_type(char *str);
+char		check_type(char *str);
 #endif
