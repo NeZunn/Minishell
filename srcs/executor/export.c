@@ -3,20 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 07:05:53 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/15 12:17:00 by codespace        ###   ########.fr       */
+/*   Created: 2023/08/20 11:32:57 by sinlee            #+#    #+#             */
+/*   Updated: 2023/08/20 12:06:10 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+# include "minishell.h"
 
 static bool	is_valid_identifier(const char *str)
 {
+    size_t i;
+
+    i = 0;
 	if (!ft_isalpha(str[0]) && str[0] != '_')
 		return (false);
-	for (size_t i = 1; i < ft_strlen(str); i++)
+    while (str[++i] != '\0')
 	{
 		if (!ft_isalnum(str[i]) && str[i] != '_')
 			return (false);
@@ -24,69 +27,54 @@ static bool	is_valid_identifier(const char *str)
 	return (true);
 }
 
-bool	print_env_vars(void)
+
+void print_env_vars(void)
 {
-	// Print user-defined environment variables
-	for (int i = 0; i < g_num_env_vars; i++)
-	{
-		printf("%s=%s\n", env_vars[i].name, env_vars[i].value);
-	}
-	// Print system environment variables
-	for (int i = 0; environ[i] != NULL; i++)
-	{
-		printf("%s\n", environ[i]);
-	}
-	return (true);
+    int i;
+
+    i = -1;
+    while (g_main->env_vars[++i]->key != NULL)
+        printf("declare -x %s=\"%s\"\n", g_main->env_vars[i]->key, g_main->env_vars[i]->value);
 }
 
-bool	execute_export(char **args)
+void export_env(char *key, char *value)
 {
-	args++;
-	char *name = ft_strdup(*args);
-	char *value = ft_strchr(name, '=');
+    if (find_env_vars(key) != NULL)
+        modify_env_vars(key, ft_strdup(value));
+    else
+        add_env_vars(ft_strdup(key), ft_strdup(value));
+}
 
-	if (value)
-	{
-		*value = '\0';
-		value++;
+bool execute_export(char **args)
+{
+    int i;
+    char *ptr;
 
-		if (!is_valid_identifier(name))
-		{
-			printf("export: `%s': not a valid identifier\n", name);
-			free(name);
-			return (false);
-		}
+    i = 0;
+    if (args[1] == NULL)
+        print_env_vars();
+    else
+    {
+        while (args[++i] != NULL)
+        {
+            ptr = ft_strchr(args[i], '=');
 
-		for (int i = 0; i < g_num_env_vars; i++)
-		{
-			if (strcmp(env_vars[i].name, name) == 0)
-			{
-				free(env_vars[i].value);
-				env_vars[i].value = ft_strdup(value);
-				free(name);
-				return (true);
-			}
-		}
+            if (ptr)
+            {
+                *ptr = '\0';
+                ptr++;
 
-		if (g_num_env_vars < MAX_ENV_VARS)
-		{
-			env_vars[g_num_env_vars].name = ft_strdup(name);
-			env_vars[g_num_env_vars].value = ft_strdup(value);
-			g_num_env_vars++;
-			free(name);
-			return (true);
-		}
-		else
-		{
-			printf("export: too many environment variables\n");
-			free(name);
-			return (false);
-		}
-	}
-	else
-	{
-		printf("export: `%s': not a valid identifier\n", *args);
-		free(name);
-		return (false);
-	}
+                if (!is_valid_identifier(args[i]))
+                {
+                    printf("%sexport: `%s': not a valid identifier\n%s", RED, args[i], RESET_COLOR);
+                    return (true);
+                }
+                export_env(args[i], ptr);
+            }
+            else
+                export_env(args[i], "");
+            // free(name);
+        }
+    }
+    return (true);
 }

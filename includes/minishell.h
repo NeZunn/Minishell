@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/20 05:44:38 by codespace        ###   ########.fr       */
+/*   Created: 2023/08/19 21:06:06 by sinlee            #+#    #+#             */
+/*   Updated: 2023/08/20 12:26:49 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_main
 {
 	int	nuclear_status; // exit status
 	env_var_t	**env_vars;
+	char		**envp;
 }	t_main;
 
 // extern env_var_t **g_env_vars;
@@ -68,7 +69,7 @@ void		exit_success(void);
 
 char		*prompt_msg(char prompt[LOGIN_NAME_MAX + PATH_MAX + 20]);
 
-void		init(void);
+void		init(char **envp);
 void		init_signals(void);
 
 bool		match_cmd(char *inpt, char *args[N_ARGS], char **envp);
@@ -76,11 +77,17 @@ char		*find_command_path(char *command, char **envp);
 void		parse_input(char *input, char **envp);
 
 void		add_env_vars(char *key, char *value);
-env_var_t	*find_env_vars(char *key);
 void		modify_env_vars(char *key, char *value);
+env_var_t	*find_env_vars(char *key);
+int			find_env(char *key, char **envp);
+char		*ft_getenv(char *key);
 void		free_env_vars(void);
 bool		flip_bool_env_vars(char *key);
 // bool    print_env_vars();
+
+env_var_t	**dup_darr(char **arr);
+void		free_darr(env_var_t **arr);
+void		free_jutsu(bool darr, char *key, char *value);
 
 bool		execute_cd(char *args[N_ARGS], char **envp);
 bool		execute_export(char **args);
@@ -88,6 +95,7 @@ bool		welcome_msg(void);
 
 int			ft_snprintf(char *str, size_t size, const char *format, ...);
 char		*ft_strtok(char *str, const char *delim);
+void		*ft_malloc(size_t size);
 
 // Token functions
 t_token		*first_last_token(t_token *tokens, bool is_last);

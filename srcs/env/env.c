@@ -6,7 +6,7 @@
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:41:03 by sinlee            #+#    #+#             */
-/*   Updated: 2023/08/19 16:29:34 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/20 12:03:14 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,31 @@
 
 void add_env_vars(char *key, char *value)
 {
-    int i;
+    int    i;
+    env_var_t **new_env_vars;
+    int     num_env_vars;
 
-    i = 0;
     if (key == NULL)
         perror_color("Environment Variables Name CANNOT be NULL!");
-    while (g_main->env_vars[i]->key != NULL && i < MAX_ENV_VARS)
-        i++;
-    if (i == MAX_ENV_VARS)
-        perror_color("So... Maximum number of environment variables reached. ggwp?");
-    g_main->env_vars[i]->key = key;
-    g_main->env_vars[i]->value = value;
-    // printf("Added %s=%s at index %d\n", key, value, i);
+    num_env_vars = 0;
+    while (g_main->env_vars[num_env_vars]->key != NULL)
+        num_env_vars++;
+    new_env_vars = (env_var_t **)ft_malloc((num_env_vars + 2) * sizeof(env_var_t *));
+    i = -1;
+    while (++i < num_env_vars)
+    {
+        new_env_vars[i] = malloc(sizeof(env_var_t));
+        new_env_vars[i]->key = g_main->env_vars[i]->key;
+        new_env_vars[i]->value = g_main->env_vars[i]->value;
+    }
+    new_env_vars[num_env_vars] = malloc(sizeof(env_var_t));
+    new_env_vars[num_env_vars]->key = key;
+    new_env_vars[num_env_vars]->value = value;
+    new_env_vars[num_env_vars+1] = malloc(sizeof(env_var_t));
+    new_env_vars[num_env_vars+1]->key = NULL;
+    new_env_vars[num_env_vars+1]->value = NULL;
+    free_darr(g_main->env_vars);
+    g_main->env_vars = new_env_vars;
 }
 
 void modify_env_vars(char *key, char *value)
@@ -38,6 +51,8 @@ void modify_env_vars(char *key, char *value)
         free(tmp->value);
         tmp->value = value;
     }
+    else
+        perror_color("Dei. Your environment variables does not exist. Nearest IQ Checkup is 5km away tho."); // might add in find_env_vars instead
 }
 
 env_var_t *find_env_vars(char *key)
@@ -45,13 +60,14 @@ env_var_t *find_env_vars(char *key)
     int i;
 
     i = 0;
-    while (ft_strcmp(g_main->env_vars[i]->key, key) && i < MAX_ENV_VARS)
-        i++;
-    if (i == MAX_ENV_VARS)
+    while (g_main->env_vars[i]->key != NULL)
     {
-        perror_color("Dei. Your environment variables does not exist. Nearest IQ Checkup is 5km away tho.");
-        return (NULL);
+        if (!ft_strcmp(g_main->env_vars[i]->key, key))
+            break;
+        i++;
     }
+    if (g_main->env_vars[i]->key == NULL)
+        return (NULL);
     else
         return (g_main->env_vars[i]);
 }
@@ -61,7 +77,7 @@ void free_env_vars(void)
     int i;
 
     i = -1;
-    while (++i < MAX_ENV_VARS)
+    while (g_main->env_vars[++i]->key != NULL)
     {
         if (g_main->env_vars[i]->key != NULL)
             free(g_main->env_vars[i]->key);
