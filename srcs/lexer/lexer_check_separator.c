@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_check_seperator.c                            :+:      :+:    :+:   */
+/*   lexer_check_separator.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 08:27:44 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/18 23:45:28 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/19 22:13:02 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	is_symbol(char *str, int *i, t_token **tokens)
 			}
 			else
 			{
-				(*tokens)->type = REDIR_APPEND;
+				(*tokens)->type = REDIR_OUT_APPEND;
 				(*i) += 2;
 			}
 		}
@@ -72,12 +72,12 @@ void	is_symbol(char *str, int *i, t_token **tokens)
 	{
 		if (str[*i + 1] == '&')
 		{
-			(*tokens)->type = AND;
+			(*tokens)->type = DOUBLE_AND;
 			(*i) += 2;
 		}
 		else
 		{
-			(*tokens)->type = AMPERSAND; //ggwp, autolose, next game
+			(*tokens)->type = ANDPARSEN; //ggwp, autolose, next game
 			i++;
 		}
 	}
@@ -115,7 +115,7 @@ void	is_word(char *str, int *i, t_token **tokens)
 		j++;
 	word = ft_substr(str, *i, j);
 	(*tokens)->type = WORD;
-	(*tokens)->content = word;
+	(*tokens)->value = word;
 	(*tokens)->next = (*tokens);
 	(*i) += j;
 }

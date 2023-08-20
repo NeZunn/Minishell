@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/08/19 16:18:16 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/20 05:44:38 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 typedef struct s_token
 {
 	int				type;
-	char			*value;
+	char			**value;
 	char			*cmd_path;
 	struct s_token	*next;
 	struct s_token	*prev;
@@ -94,7 +94,8 @@ t_token		*first_last_token(t_token *tokens, bool is_last);
 t_token		*token_join(t_token *tokens, char *str);
 t_token 	create_token(char *value, int type);
 void		free_token(t_token *token);
-char		check_type(char *str);
-void		is_symbol(char *str, int *i, t_token **tokens)
-void		space_skip(char *str, int *i)
+int			check_type(char *str, t_token *tokens);
+void		is_symbol(char *str, int *i, t_token **tokens);
+void		is_word(char *str, int *i, t_token **tokens);
+void		space_skip(char *str, int *i);
 #endif

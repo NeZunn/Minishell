@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:18:48 by djin              #+#    #+#             */
-/*   Updated: 2023/08/18 17:47:21 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/20 08:20:32 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_token	*token_join(t_token *tokens, char *str)
 		return (NULL);
 	tokens -> next = new_token;
 	new_token -> prev = tokens;
-	return (new_token); 
+	return (new_token);
 }
 
 t_token *first_last_token(t_token *tokens, bool is_last)
@@ -44,7 +44,7 @@ t_token *first_last_token(t_token *tokens, bool is_last)
 
 t_token create_token(char *value, int type)
 {
-	t_token tokens;
+	t_token *tokens;
 
 	tokens = malloc(sizeof(t_token));
 	if (!tokens)
