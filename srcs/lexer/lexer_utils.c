@@ -18,22 +18,22 @@ void	space_skip(char *str, int *i)
 		(*i)++;
 }
 
-char	check_type(char *str, t_token *tokens)
+void	check_type(char *input, t_token *tokens)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (input[i])
 	{
-		tokens = token_join(tokens, str[i]);
-		if (str[i] == ' ')
-			space_skip(, &i);
-		if (str[i] == '|' || || str[i] == '<' || str[i] == '>' || str[i] == '&'
-			|| str[i] == '(' || str[i] == ')' || str[i] == '$' 
-			|| str[i] == '\'' || str[i] == '\"'|| str[i] == '\\'
-			|| str[i] == '/' || str[i] == '{' || str[i] == '}')
-			is_symbol(str, &i, &tokens);
-		if (str[i] == is_word(str, &i, &tokens))
-			is_word(str, &i, &tokens);
+		tokens = create_token(0);
+		if (ft_isalpha(input[i]) == true)
+			is_word(input, &i, tokens);
+		else if (input[i] == ' ')
+			space_skip(input, &i);
+		else if (input[i] == '|' || input[i] == '<' || input[i] == '>' || input[i] == '&'
+			|| input[i] == '(' || input[i] == ')' || input[i] == '$' 
+			|| input[i] == '\'' || input[i] == '\"'|| input[i] == '\\'
+			|| input[i] == '/' || input[i] == '{' || input[i] == '}')
+			is_symbol(input, &i, tokens);
 	}
 }
