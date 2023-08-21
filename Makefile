@@ -6,7 +6,7 @@
 #    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/15 06:55:38 by codespace         #+#    #+#              #
-#    Updated: 2023/08/20 12:27:35 by codespace        ###   ########.fr        #
+#    Updated: 2023/08/21 12:58:15 by codespace        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCS_FILES = $(addprefix $(MAIN_DIR)/, main.c initialize.c signals.c prompt.c) \
 			 $(addprefix $(UTILS_DIR)/, misc.c ft_snprintf.c inpt.c ft_malloc.c) \
 			 $(addprefix $(ENV_DIR)/, env.c env_utils.c) \
 			 $(addprefix $(EXEC_DIR)/, commands.c cd.c welcome.c) \
-			#  $(addprefix $(LEXER_DIR)/, lexer.c)
+			 $(addprefix $(LEXER_DIR)/, lexer.c lexer_utils.c lexer_linked_list_utils.c lexer_check_separator.c) \
 
 SRCS = $(addprefix $(SRCS_DIR)/,$(SRCS_FILES))
 

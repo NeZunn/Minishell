@@ -6,26 +6,35 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 19:00:34 by sinlee            #+#    #+#             */
-/*   Updated: 2023/08/20 05:40:56 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/21 13:19:31 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	del(void *content)
+{
+	free(content);
+}
+
 void	parse_input(char *input, char **envp)
 {
-	t_token	*tokens;
-	int		i;
+	t_token *tokens;
 
-	i = 0;
-	tokens->value = (char **)malloc(sizeof(char *) * ft_strlen(input) + 1);
-	tokens->value[i] = ft_strtok(input, " ");
-	i++;
-	while (tokens->value[i++])
-	{
-		tokens->type = check_type(tokens->value[i], tokens);
-		tokens->next = tokens;
-		tokens->prev = token_join(tokens, tokens->value[i]);
-		tokens->value[i] = ft_strtok(NULL, " ");
-	}
+	check_type(input, tokens);
+	first_last_token(tokens, false);
+	ft_lstclear_token(&tokens, del);
 }
+
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	char	*input;
+
+// 	while (1)
+// 	{
+// 		input = readline("minishell$ ");
+// 		parse_input(input, envp);
+// 		free(input);
+// 	}
+// 	return (0);
+// }
