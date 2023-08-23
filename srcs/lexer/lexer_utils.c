@@ -18,22 +18,29 @@ void	space_skip(char *str, int *i)
 		(*i)++;
 }
 
-void	check_type(char *input, t_token *tokens)
+void	check_type(char *input)
 {
+	t_token	*tokens;
 	int	i;
 
 	i = 0;
 	while (input[i])
 	{
-		tokens = create_token(0);
-		if (ft_isalpha(input[i]) == true)
-			is_word(input, &i, tokens);
+		if (ft_isalpha(input[i]) == true || ft_isdigit(input[i]) == true)
+			is_word(input, &i, &tokens);
 		else if (input[i] == ' ')
 			space_skip(input, &i);
 		else if (input[i] == '|' || input[i] == '<' || input[i] == '>' || input[i] == '&'
 			|| input[i] == '(' || input[i] == ')' || input[i] == '$' 
-			|| input[i] == '\'' || input[i] == '\"'|| input[i] == '\\'
-			|| input[i] == '/' || input[i] == '{' || input[i] == '}')
-			is_symbol(input, &i, tokens);
+			|| input[i] == '\'' || input[i] == '\"' || input[i] == '{' || input[i] == '}')
+			is_symbol(input, &i, &tokens);
+		else
+		{
+			printf("Error: Invalid character\n");
+			i++;
+		}
+		// check_error(tokens);
 	}
+	tokens = NULL;
+	printf("\n\n\nEnd tokens: %p\n", tokens);
 }

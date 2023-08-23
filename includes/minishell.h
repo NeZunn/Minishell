@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 21:06:06 by sinlee            #+#    #+#             */
-/*   Updated: 2023/08/21 13:04:26 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/23 08:17:50 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,23 @@ int			ft_snprintf(char *str, size_t size, const char *format, ...);
 char		*ft_strtok(char *str, const char *delim);
 void		*ft_malloc(size_t size);
 
-// Token functions
-t_token		*first_last_token(t_token *tokens, bool is_last);
-t_token		*token_join(t_token *tokens, int type);
-t_token 	*create_token(int type);
+// Token linked listfunctions
+t_token		*first_last_token(t_token **tokens, bool is_last);
+void		token_lstadd_back(t_token **lst, t_token *new);
+t_token		*find_last_token(t_token *lst);
+t_token 	*create_token(int type, t_token *tokens);
 void		ft_lstclear_token(t_token **lst, void (*del)(void *));
-void		check_type(char *input, t_token *tokens);
-void		is_symbol(char *str, int *i, t_token *tokens);
-void		is_word(char *str, int *i, t_token *tokens);
+void		del(void *content);
+
+// Lexer utils
+void		check_type(char *input);
+void		is_symbol(char *str, int *i, t_token **tokens);
+void		is_word(char *str, int *i, t_token **tokens);
 void		space_skip(char *str, int *i);
 
-void		print_token(t_token *tokens);
+
+// Parsing functions
+void		check_error(t_token *tokens);
+
+void	
 #endif

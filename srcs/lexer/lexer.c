@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 19:00:34 by sinlee            #+#    #+#             */
-/*   Updated: 2023/08/21 13:19:31 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/23 08:17:28 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ void	del(void *content)
 
 void	parse_input(char *input, char **envp)
 {
-	t_token *tokens;
-
-	check_type(input, tokens);
-	first_last_token(tokens, false);
-	ft_lstclear_token(&tokens, del);
+	check_type(input);
+	// print_token(tokens, true, "tokens");
+	// first_last_token(&tokens, false);
+	// ft_lstclear_token(&tokens, del);
 }
 
 // int	main(int argc, char **argv, char **envp)
