@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_check_separator.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 08:27:44 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/21 12:57:07 by codespace        ###   ########.fr       */
+/*   Updated: 2023/08/21 21:41:36 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	 is_symbol(char *str, int *i, t_token *tokens)
 		(*i)++;
 	}
 	tokens = token_join(tokens, tokens->type);
-	printf("%p\n", tokens);
+	printf("Num: %d Command: %s\n", tokens->type, tokens->cmd);
 	(tokens) = (tokens)->next;
 }
 
@@ -140,7 +140,8 @@ void	is_word(char *str, int *i, t_token *tokens)
 	(tokens)->type = WORD;
 	(tokens)->cmd = ft_substr(str, *i, j);
 	tokens = token_join(tokens, WORD);
-	printf("%p\n", tokens);
+	// printf("%p\n", tokens);
+	printf("Num: %d Command: %s\n", tokens->type, tokens->cmd);
 	(*i) += j;
 	(tokens) = (tokens)->next;
 }
