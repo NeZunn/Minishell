@@ -6,7 +6,7 @@
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 19:00:34 by sinlee            #+#    #+#             */
-/*   Updated: 2023/08/21 22:15:50 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/23 17:57:52 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ void	parse_input(char *input, char **envp)
 	// ft_lstclear_token(&tokens, del);
 }
 
-int	main(int argc, char **argv, char **envp)
-{
-	char	*input;
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	char	*input;
 
-	while (1)
-	{
-		input = readline("minishell$ ");
-		parse_input(input, envp);
-		free(input);
-	}
-	return (0);
-}
+// 	while (1)
+// 	{
+// 		input = readline("minishell$ ");
+// 		parse_input(input, envp);
+// 		free(input);
+// 	}
+// 	return (0);
+// }
