@@ -6,7 +6,7 @@
 /*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:21:02 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/20 11:56:32 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/08/20 12:34:52 by sinlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void init_env(char **envp)
 	g_main->env_vars = dup_darr(envp);
 	add_env_vars(ft_strdup("NUM_QUOTES"), ft_strdup("0"));
 	add_env_vars(ft_strdup("QUOTES"), ft_strdup("0"));
+	add_env_vars(ft_strdup("PWD_MALLOC"), ft_strdup("0"));
 	// add_env_vars(ft_strdup("TEST"), ft_strdup("123"));
 }
 
