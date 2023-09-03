@@ -3,64 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_linked_list_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: djin <djin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:18:48 by djin              #+#    #+#             */
-/*   Updated: 2023/08/21 12:56:32 by codespace        ###   ########.fr       */
+/*   Updated: 2023/09/03 14:08:29 by djin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*token_join(t_token *tokens, int type)
-
+t_token *create_token(char *cmd, int type)
 {
-	t_token	*new_token;
+	t_token	*newnode;
 
-	new_token = tokens;
-	if (!new_token)
+	newnode = malloc(sizeof(t_token));
+	if (newnode == NULL)
 		return (NULL);
-	if (!tokens)
-		return (new_token);
-	tokens->next = new_token;
-	new_token -> prev = tokens;
-	return (new_token);
+	newnode -> cmd = cmd;
+	newnode -> type = type;
+	newnode -> next = NULL;
+	newnode -> prev = NULL;
+	return (newnode);
 }
 
-t_token	*create_token(int type)
+// creates a new token
+t_token	*add_tokens(t_token *tokens, char *input, int type)
 {
-	t_token	*token;
+	t_token	*new;
 
-	token = malloc(sizeof(t_token));
-	if (!token)
+	new = create_token(input, type);
+	if (!new)
 		return (NULL);
-	token->type = type;
-	token->cmd = NULL;
-	token->next = NULL;
-	token->prev = NULL;
-	return (token);
+	if (!(tokens))
+		return (new);
+	// tokens = malloc(sizeof(t_token));
+	tokens -> next = new;
+	new -> prev = tokens;
+	return (new);
 }
 
-t_token *first_last_token(t_token *tokens, bool is_last)
+t_token	*lst_first_last(t_token *tokens, bool is_last)
 {
-	if (!tokens)
-		return (NULL);
-	if (is_last)
+	if (is_last == true)
 	{
-		while (tokens->next)
-		{
-			tokens = tokens->next;
-		}
+		while (tokens -> next != NULL && tokens != NULL)
+			tokens = tokens -> next;
 		return (tokens);
 	}
-	else
-	{
-		while (tokens->prev != NULL)
-		{
-			tokens = tokens->prev;
-		}
-		return (tokens);
-	}
+	while (tokens -> prev != NULL && tokens != NULL)
+		tokens = tokens -> prev;
+	return (tokens);
 }
 
 void	ft_lstclear_token(t_token **lst, void (*del)(void *))
@@ -80,4 +72,18 @@ void	ft_lstclear_token(t_token **lst, void (*del)(void *))
 		free(prevnode);
 	}
 	*lst = newnode;
+}
+
+void	print_stack(t_token *tokens)
+{
+	tokens = lst_first_last(tokens, false);
+	while (tokens)
+	{
+		if (tokens != NULL)
+		{
+			printf("stack_a: %s\n", tokens->cmd);
+			printf("stack_a address: %p\n", tokens);
+			tokens = tokens->next;
+		}
+	}
 }

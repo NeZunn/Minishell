@@ -3,145 +3,125 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_check_separator.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sinlee <sinlee@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: djin <djin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 08:27:44 by codespace         #+#    #+#             */
-/*   Updated: 2023/08/21 21:41:36 by sinlee           ###   ########.fr       */
+/*   Updated: 2023/09/03 14:02:40 by djin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	 is_symbol(char *str, int *i, t_token *tokens)
+bool	ft_symbol(char input)
 {
-	if (str[*i] == '|')
-	{
-		if (str[*i + 1] == '|')
-		{
-			(tokens)->type = OR;
-			tokens->cmd = ft_strdup("||");
-			(*i) += 2;
-		}
-		else
-		{
-			(tokens)->type = PIPE;
-			tokens->cmd = ft_strdup("|");
-			(*i)++;
-		}
-	}
-	else if(str[*i] == '<' || str[*i] == '>')
-	{
-		if (str[*i + 1] == '<' || str[*i] == '<')
-		{
-			if (str[*i] == '<')
-			{
-				(tokens)->type = REDIR_IN;
-				tokens->cmd = ft_strdup("<");
-				(*i)++;
-			}
-			else
-			{
-				(tokens)->type = HERE_DOC;
-				tokens->cmd = ft_strdup("<<");
-				(*i) += 2;
-			}
-		}
-		else if (str[*i + 1] == '>' || str[*i] == '>')
-		{
-			if (str[*i] == '>')
-			{
-				(tokens)->type = REDIR_OUT;
-				tokens->cmd = ft_strdup(">");
-				(*i)++;
-			}
-			else
-			{
-				(tokens)->type = REDIR_OUT_APPEND;
-				tokens->cmd = ft_strdup(">>");
-				(*i) += 2;
-			}
-		}
-	}
-	else if (str[*i] == '(' || str[*i] == ')' || str[*i] == '{' || str[*i] == '}')
-	{
-		if (str[*i] == '(')
-		{
-			(tokens)->type = OPEN_BRACKET;
-			tokens->cmd = ft_strdup("(");
-		}
-		else if (str[*i] == ')')
-		{
-			(tokens)->type = CLOSE_BRACKET;
-			tokens->cmd = ft_strdup(")");
-		}
-		else if (str[*i] == '{')
-		{
-			(tokens)->type = OPEN_BRACE;
-			tokens->cmd = ft_strdup("{");
-		}
-		else
-		{
-			(tokens)->type = CLOSE_BRACE;
-			tokens->cmd = ft_strdup("}");
-		}
-		(*i)++;
-	}
-	else if (str[*i] == '&')
-	{
-		if (str[*i + 1] == '&')
-		{
-			(tokens)->type = DOUBLE_AND;
-			tokens->cmd = ft_strdup("&&");
-			(*i) += 2;
-		}
-		else
-		{
-			(tokens)->type = ANDPARSEN; //ggwp, autolose, next game
-			tokens->cmd = ft_strdup("&");
-			i++;
-		}
-	}
-	else if (str[*i] == '$')
-	{
-		(tokens)->type = DOLLAR; // financial issue?
-		tokens->cmd = ft_strdup("$");
-		(*i)++;
-	}
-	else if (str[*i] == '\'' || str[*i] == '\"')
-	{
-		if (str[*i] == '\'')
-		{
-			(tokens)->type = BOO_NO_EXPANSION;
-			(tokens)->cmd = ft_strdup("\'");
-		}
-		else
-		{
-			(tokens)->type = DOMESTIC_EXPANSION;
-			(tokens)->cmd = ft_strdup("\"");
-		}
-		(*i)++;
-	}
-	tokens = token_join(tokens, tokens->type);
-	printf("Num: %d Command: %s\n", tokens->type, tokens->cmd);
-	(tokens) = (tokens)->next;
+	if (input == '|' || input == '|' || input == '<' || input == '>' || input == '(' || input == ')'
+		|| input == '{' || input == '}' || input == '&' || input == '$' || input == '\'' || input == '\"'
+		|| input == '@' || input == '!' || input == '#' || input == '%' || input == '^' || input == '*'
+		|| input == '-' || input == '+' || input == '=' || input == '?' || input == '/' || input == ':'
+		|| input == '.' || input == '[' || input == ']' || input == '_')
+		return (true);
+	else
+		return (false);
 }
 
-void	is_word(char *str, int *i, t_token *tokens)
+void	is_symbol(char *input, int *i, t_token **tokens)
 {
-	int	j;
+	int		count_words;
 
-	j = 0;
-	while (str[*i + j] && str[*i + j] != ' ' && str[*i + j] != '|'
-		&& str[*i + j] != '<' && str[*i + j] != '>' && str[*i + j] != '&'
-		&& str[*i + j] != '(' && str[*i + j] != ')' && str[*i + j] != '$'
-		&& str[*i + j] != '\'' && str[*i + j] != '\"' && str[*i + j] != '\\'
-		&& str[*i + j] != '/' && str[*i + j] != '{' && str[*i + j] != '}')
-		j++;
-	(tokens)->type = WORD;
-	(tokens)->cmd = ft_substr(str, *i, j);
-	tokens = token_join(tokens, WORD);
-	// printf("%p\n", tokens);
-	printf("Num: %d Command: %s\n", tokens->type, tokens->cmd);
-	(*i) += j;
-	(tokens) = (tokens)->next;
+	count_words = 0;
+	if (input[*i] == '|')
+	{
+		if (input[*i + 1] == '|')
+		{
+			count_words = 2;
+			(*tokens) = add_tokens(*tokens, "||", OR);
+		}
+		else
+		{
+			count_words = 1;
+			(*tokens) = add_tokens(*tokens, "|", PIPE);
+		}
+	}
+	if (input[*i] == '<' || input[*i] == '>')
+	{
+		if (input[*i + 1] == '<' && input[*i] == '<')
+		{
+			count_words = 2;
+			(*tokens) = add_tokens(*tokens, "<<", HERE_DOC);
+		}
+		else if (input[*i + 1] == '>' && input[*i] == '>')
+		{
+			count_words = 2;
+			(*tokens) = add_tokens(*tokens, ">>", REDIR_OUT_APPEND);
+		}
+		else if (input[*i] == '>')
+		{
+			count_words = 1;
+			(*tokens) = add_tokens(*tokens, ">", REDIR_OUT);
+		}
+		else if (input[*i] == '<')
+		{
+			count_words = 1;
+			(*tokens) = add_tokens(*tokens, "<", REDIR_IN);
+		}
+	}
+	if (input[*i] == '(' || input[*i] == ')' || input[*i] == '{' || input[*i] == '}')
+	{
+		if (input[*i] == '(')
+		{
+			count_words = 1;
+			(*tokens) = add_tokens(*tokens, "(", OPEN_BRACKET);
+		}
+		else if (input[*i] == ')')
+		{
+			count_words = 1;
+			(*tokens) = add_tokens(*tokens, ")", CLOSE_BRACKET);
+		}
+		else if (input[*i] == '{')
+		{
+			count_words = 1;
+			(*tokens) = add_tokens(*tokens, "{", OPEN_BRACE);
+		}
+		else if (input[*i] == '}')
+		{
+			count_words = 1;
+			(*tokens) = add_tokens(*tokens, "}", CLOSE_BRACE);
+		}
+	}
+	if (input[*i] == '[' || input[*i] == ']')
+	{
+		if (input[*i] == '[')
+		{
+			count_words = 1;
+			(*tokens) = add_tokens(*tokens, "[", OPEN_SQUARE_BRACKET);
+		}
+		else if (input[*i] == ']')
+		{
+			count_words = 1;
+			(*tokens) = add_tokens(*tokens, "]", CLOSE_SQUARE_BRACKET);
+		}
+	}
+	if (input[*i] == '&')
+	{
+		if (input[*i + 1] == '&' && input[*i] == '&')
+		{
+			count_words = 2;
+			(*tokens) = add_tokens(*tokens, "&&", DOUBLE_AND);
+		}
+		else
+		{
+			count_words = 1;
+			(*tokens) = add_tokens(*tokens, "&", ANDPARSEN);
+		}
+	}
+	if (input[*i] == '$' || input[*i] == '\'' || input[*i] == '\"' || input[*i] == '!'
+	|| input[*i] == '@' || input[*i] == '#' || input[*i] == '%' || input[*i] == '^'
+	|| input[*i] == '*' || input[*i] == '-' || input[*i] == '_' || input[*i] == '+'
+	|| input[*i] == '=' || input[*i] == '+' || input[*i] == ':' || input[*i] == '?'
+	|| input[*i] == '.' || input[*i] == ',' || input[*i] == '/')
+	{
+		count_words = 1;
+		(*tokens) = add_tokens(*tokens, ft_substr(input, *i, 1), ft_checksymb(input[*i]));
+	}
+	*i += count_words;
 }
