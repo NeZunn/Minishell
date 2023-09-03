@@ -6,7 +6,7 @@
 /*   By: djin <djin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 14:03:36 by djin              #+#    #+#             */
-/*   Updated: 2023/09/03 14:04:37 by djin             ###   ########.fr       */
+/*   Updated: 2023/09/03 17:00:15 by djin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,9 @@ int	ft_checksymb(char c)
 		return (DOLLAR);
 	if (c == '/')
 		return (SLASH);
+	if (c == '\"')
+		return (DOMESTIC_EXPANSION);
+	if (c == '\'')
+		return (BOO_NO_EXPANSION);
 	return (0);
 }

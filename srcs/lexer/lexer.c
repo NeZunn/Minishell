@@ -6,7 +6,7 @@
 /*   By: djin <djin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 19:00:34 by sinlee            #+#    #+#             */
-/*   Updated: 2023/09/03 14:04:10 by djin             ###   ########.fr       */
+/*   Updated: 2023/09/03 17:04:33 by djin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ void	parse_input(char *input, char **envp)
 			}
 			(*tokens) = add_tokens(*tokens, ft_substr(input, j, count_words), DIGIT);
 		}
-		else
-			i++;
 	}
 	// print_stack(*tokens);
 }
