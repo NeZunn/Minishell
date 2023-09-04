@@ -58,17 +58,20 @@ void	parse_input(char *input, char **envp)
 		}
 	}
 	// print_stack(*tokens);
+	lst_first_last(*tokens, false);
+	free_stack(tokens, del);
+	free(tokens);
 }
 
-int	main(int argc, char **argv, char **envp)
-{
-	char	*input;
+// int	main(int argc, char **argv, char **envp)
+// {
+// 	char	*input;
 
-	while (1)
-	{
-		input = readline("minishell$: ");
-		parse_input(input, envp);
-		free(input);
-	}
-	return (0);
-}
+// 	while (1)
+// 	{
+// 		input = readline("minishell$: ");
+// 		parse_input(input, envp);
+// 		free(input);
+// 	}
+// 	return (0);
+// }

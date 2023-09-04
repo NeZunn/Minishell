@@ -55,23 +55,19 @@ t_token	*lst_first_last(t_token *tokens, bool is_last)
 	return (tokens);
 }
 
-void	ft_lstclear_token(t_token **lst, void (*del)(void *))
+void	free_stack(t_token **tokens, void (*del)(void *))
 {
-	t_token	*newnode;
-	t_token	*prevnode;
+	t_token	*tmp;
 
-	if (!lst || !del)
+	if (!tokens)
 		return ;
-	prevnode = NULL;
-	newnode = *lst;
-	while (newnode->next != NULL)
+	while (*tokens)
 	{
-		prevnode = newnode;
-		newnode = newnode->next;
-		del(prevnode -> cmd);
-		free(prevnode);
+		tmp = (*tokens) -> next;
+		del((*tokens) -> cmd);
+		free(*tokens);
+		*tokens = tmp;
 	}
-	*lst = newnode;
 }
 
 void	print_stack(t_token *tokens)
