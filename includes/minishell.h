@@ -6,7 +6,7 @@
 /*   By: djin <djin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 21:06:06 by sinlee            #+#    #+#             */
-/*   Updated: 2023/09/03 14:07:47 by djin             ###   ########.fr       */
+/*   Updated: 2023/09/04 15:44:43 by djin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,4 @@ int			ft_checksymb(char c);
 
 void		print_token(t_token *tokens, bool to_first, char *str);
 
-void	
 #endif
