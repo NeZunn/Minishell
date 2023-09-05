@@ -36,7 +36,6 @@ t_token	*add_tokens(t_token *tokens, char *input, int type)
 		return (NULL);
 	if (!(tokens))
 		return (new);
-	// tokens = malloc(sizeof(t_token));
 	tokens -> next = new;
 	new -> prev = tokens;
 	return (new);
@@ -55,18 +54,27 @@ t_token	*lst_first_last(t_token *tokens, bool is_last)
 	return (tokens);
 }
 
-void	free_stack(t_token **tokens, void (*del)(void *))
+void	free_stack(t_token **tokens, void (*del)(void *), bool loop)
 {
 	t_token	*tmp;
 
-	if (!tokens)
+	if (!(tokens) || !(*tokens))
 		return ;
-	while (*tokens)
+	(*tokens) = lst_first_last((*tokens), false);
+	if (!loop)
 	{
 		tmp = (*tokens) -> next;
-		del((*tokens) -> cmd);
 		free(*tokens);
-		*tokens = tmp;
+		(*tokens) = tmp;
+	}
+	else
+	{
+		while (*tokens)
+		{
+			tmp = (*tokens) -> next;
+			free(*tokens);
+			(*tokens) = tmp;
+		}
 	}
 }
 

@@ -48,8 +48,7 @@ void	parse_input(char *input, char **envp)
 			is_symbol(input, &i, tokens);
 	}
 	print_stack(*tokens);
-	lst_first_last(*tokens, false);
-	free_stack(tokens, del);
+	free_stack(tokens, del, true);
 	free(tokens);
 }
 
