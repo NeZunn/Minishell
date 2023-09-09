@@ -64,6 +64,7 @@ void	free_stack(t_token **tokens, void (*del)(void *), bool loop)
 	if (!loop)
 	{
 		tmp = (*tokens) -> next;
+		free((*tokens)->cmd);
 		free(*tokens);
 		(*tokens) = tmp;
 	}
@@ -72,6 +73,7 @@ void	free_stack(t_token **tokens, void (*del)(void *), bool loop)
 		while (*tokens)
 		{
 			tmp = (*tokens) -> next;
+			free((*tokens)->cmd);
 			free(*tokens);
 			(*tokens) = tmp;
 		}
