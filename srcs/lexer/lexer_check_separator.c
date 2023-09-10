@@ -18,7 +18,7 @@ bool	ft_symbol(char input)
 		|| input == '{' || input == '}' || input == '&' || input == '$' || input == '\'' || input == '\"'
 		|| input == '@' || input == '!' || input == '#' || input == '%' || input == '^' || input == '*'
 		|| input == '-' || input == '+' || input == '=' || input == '?' || input == '/' || input == ':'
-		|| input == '.' || input == '[' || input == ']' || input == '_')
+		|| input == '.' || input == '[' || input == ']' || input == '_' || input == ',')
 		return (true);
 	else
 		return (false);
@@ -34,12 +34,12 @@ void	is_symbol(char *input, int *i, t_token **tokens)
 		if (input[*i + 1] == '|')
 		{
 			count_words = 2;
-			(*tokens) = add_tokens(*tokens, "||", OR);
+			(*tokens) = add_tokens(*tokens, ft_substr(input, *i, 1), OR);
 		}
 		else
 		{
 			count_words = 1;
-			(*tokens) = add_tokens(*tokens, "|", PIPE);
+			(*tokens) = add_tokens(*tokens, ft_substr(input, *i, 1), PIPE);
 		}
 	}
 	if (input[*i] == '<' || input[*i] == '>')
@@ -47,22 +47,22 @@ void	is_symbol(char *input, int *i, t_token **tokens)
 		if (input[*i + 1] == '<' && input[*i] == '<')
 		{
 			count_words = 2;
-			(*tokens) = add_tokens(*tokens, "<<", HERE_DOC);
+			(*tokens) = add_tokens(*tokens, ft_substr(input, *i, 1), HERE_DOC);
 		}
 		else if (input[*i + 1] == '>' && input[*i] == '>')
 		{
 			count_words = 2;
-			(*tokens) = add_tokens(*tokens, ">>", REDIR_OUT_APPEND);
+			(*tokens) = add_tokens(*tokens, ft_substr(input, *i, 1), REDIR_OUT_APPEND);
 		}
 		else if (input[*i] == '>')
 		{
 			count_words = 1;
-			(*tokens) = add_tokens(*tokens, ">", REDIR_OUT);
+			(*tokens) = add_tokens(*tokens, ft_substr(input, *i, 1), REDIR_OUT);
 		}
 		else if (input[*i] == '<')
 		{
 			count_words = 1;
-			(*tokens) = add_tokens(*tokens, "<", REDIR_IN);
+			(*tokens) = add_tokens(*tokens, ft_substr(input, *i, 1), REDIR_IN);
 		}
 	}
 	if (input[*i] == '(' || input[*i] == ')' || input[*i] == '{' || input[*i] == '}')
@@ -70,22 +70,22 @@ void	is_symbol(char *input, int *i, t_token **tokens)
 		if (input[*i] == '(')
 		{
 			count_words = 1;
-			(*tokens) = add_tokens(*tokens, "(", OPEN_BRACKET);
+			(*tokens) = add_tokens(*tokens, ft_substr(input, *i, 1), OPEN_BRACKET);
 		}
 		else if (input[*i] == ')')
 		{
 			count_words = 1;
-			(*tokens) = add_tokens(*tokens, ")", CLOSE_BRACKET);
+			(*tokens) = add_tokens(*tokens, ft_substr(input, *i, 1), CLOSE_BRACKET);
 		}
 		else if (input[*i] == '{')
 		{
 			count_words = 1;
-			(*tokens) = add_tokens(*tokens, "{", OPEN_BRACE);
+			(*tokens) = add_tokens(*tokens, ft_substr(input, *i, 1), OPEN_BRACE);
 		}
 		else if (input[*i] == '}')
 		{
 			count_words = 1;
-			(*tokens) = add_tokens(*tokens, "}", CLOSE_BRACE);
+			(*tokens) = add_tokens(*tokens, ft_substr(input, *i, 1), CLOSE_BRACE);
 		}
 	}
 	if (input[*i] == '[' || input[*i] == ']')
@@ -93,12 +93,12 @@ void	is_symbol(char *input, int *i, t_token **tokens)
 		if (input[*i] == '[')
 		{
 			count_words = 1;
-			(*tokens) = add_tokens(*tokens, "[", OPEN_SQUARE_BRACKET);
+			(*tokens) = add_tokens(*tokens, ft_substr(input, *i, 1), OPEN_SQUARE_BRACKET);
 		}
 		else if (input[*i] == ']')
 		{
 			count_words = 1;
-			(*tokens) = add_tokens(*tokens, "]", CLOSE_SQUARE_BRACKET);
+			(*tokens) = add_tokens(*tokens, ft_substr(input, *i, 1), CLOSE_SQUARE_BRACKET);
 		}
 	}
 	if (input[*i] == '&')
@@ -106,12 +106,12 @@ void	is_symbol(char *input, int *i, t_token **tokens)
 		if (input[*i + 1] == '&' && input[*i] == '&')
 		{
 			count_words = 2;
-			(*tokens) = add_tokens(*tokens, "&&", DOUBLE_AND);
+			(*tokens) = add_tokens(*tokens, ft_substr(input, *i, 1), DOUBLE_AND);
 		}
 		else
 		{
 			count_words = 1;
-			(*tokens) = add_tokens(*tokens, "&", ANDPARSEN);
+			(*tokens) = add_tokens(*tokens, ft_substr(input, *i, 1), ANDPARSEN);
 		}
 	}
 	if (input[*i] == '$' || input[*i] == '\'' || input[*i] == '\"' || input[*i] == '!'
@@ -121,7 +121,7 @@ void	is_symbol(char *input, int *i, t_token **tokens)
 	|| input[*i] == '.' || input[*i] == ',' || input[*i] == '/')
 	{
 		count_words = 1;
-		(*tokens) = add_tokens(*tokens, ft_substr(input, *i, 1), ft_checksymb(input[*i]));
+		(*tokens) = add_tokens(*tokens, ft_substr(input, *i, count_words), ft_checksymb(input[*i]));
 	}
 	*i += count_words;
 }

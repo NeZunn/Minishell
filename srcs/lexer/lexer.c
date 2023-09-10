@@ -34,8 +34,6 @@ void	parse_input(char *input, char **envp)
 		count_words = 0;
 		if (input[i] == ' ' || input[i] == '\t')
 			i++;
-		if (input[i] == ';')
-			i++;
 		if ((ft_isalpha(input[i]) == true || ft_isdigit(input[i]) == true) && input[i] != '\0')
 		{
 			j = i;

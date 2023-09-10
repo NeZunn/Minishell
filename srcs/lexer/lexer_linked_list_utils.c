@@ -89,6 +89,7 @@ void	print_stack(t_token *tokens)
 		{
 			printf("stack_a: %s\n", tokens->cmd);
 			printf("stack_a address: %p\n", tokens);
+			printf("stack_a type: %d\n", tokens->type);
 			tokens = tokens->next;
 		}
 	}
